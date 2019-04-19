@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .container
+    h1 #{title}
+    a.btn.btn-primary(href='/matches') Add new Match
+    each match, i in matches
+      .row
+        .col-4
+          p= match.first_team_select
+        .col-4
+          p= match.match_date
+        .col-4
+          p= match.second_team_select  
+        

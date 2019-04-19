@@ -1,0 +1,96 @@
+extends layout
+
+block content
+  .container
+    if user
+      .row
+        .col-8.offset-1.mt-2
+          h4 Хочу добавить свою команду
+        .col-8.offset-1
+          a.btn.btn-outline-dark(href='/lists/teams/add/new') Новая Команда
+            
+    .row.top_fixed
+      .col-1.offset-1
+        p №
+      .col-2
+        p Команды
+      .col-1
+        p И
+      .col-1
+        p П
+      .col-1
+        p Н
+      .col-1
+        p П
+      .col-1
+        p З
+      .col-1
+        p П
+      .col-1
+        p Очко
+    each list, i in lists
+      .row.tabels_down
+        .col-1.offset-1
+          p= i+1+"." 
+        .col-2
+          p= list.team_name
+        .col-1
+          p= list.games
+        .col-1
+          p.list_wins= list.wins
+        .col-1
+          p= list.draw
+        .col-1
+          p= list.loss
+        .col-1
+          p= list.scored_goal
+        .col-1
+          p= list.missed_goal
+        .col-1
+          p= list.point
+      if user
+        if user.username === 'Olzhas'
+          .row
+            .col-12
+              form(method='POST', action='/lists/teams/' + list._id)
+                .row
+                  .col-1.offset-4
+                    input.form-control.form-control-sm(name='games', type='number', value= list.games)
+                  .col-1
+                    input.form-control.form-control-sm(name='wins', type='number', value= list.wins)
+                  .col-1
+                    input.form-control.form-control-sm(name='draw', type='number', value= list.draw)
+                  .col-1
+                    input.form-control.form-control-sm(name='loss', type='number', value= list.loss)
+                  .col-1
+                    input.form-control.form-control-sm(name='scored_goal', type='number', value= list.scored_goal)
+                  .col-1
+                    input.form-control.form-control-sm(name='missed_goal', type='number', value= list.missed_goal)
+                  .col-1
+                    input.form-control.form-control-sm(name='point', type='number', value= list.point)
+                  .col-1
+                    input.btn.btn-primary(type='submit', value='Submit')
+    
+    
+  style.
+    .top_fixed .col-1, .top_fixed .col-2{
+      border-top: 1px solid darkgray;
+      border-bottom: 1px solid darkgray;
+      padding-top: 15px;
+      background-color: black;
+      color: white;
+      margin-top: 30px;
+    }
+    .col-1{
+      display: flex;
+      justify-content: center;
+    }
+    .col-2{
+      display: flex;
+      justify-content: center;
+    }
+    .tabels_down{
+      position: relative;
+      top: 10px;
+    }
+    

@@ -1,0 +1,58 @@
+extends layout  
+
+block content
+  .container
+    .row
+      #first_match_block.col-lg-12.col-sm-12
+        .container
+          h3.mt-4.text-light 
+            u Матчи с Апреля по - Июнь, 2019 года
+        if user 
+          if user.username == 'Olzhas'
+            form(method='POST', action='/matches')
+            .row
+              .col-lg-4.col-sm-12
+                .container
+                  .form-group
+                    label Первая Команда
+                    input.form-control(name='first_team_select', type='text', placeholder='Barcelona...')
+              .col-lg-4.col-sm-12
+                .container
+                  .form-group
+                    label Время Матча
+                    input.form-control(name='match_date', type='text', placeholder='18:00, 21.04.19')
+              .col-lg-4.col-sm-12
+                .container
+                  .form-group
+                    label Вторая Команда
+                    input.form-control(name='second_team_select', type='text', placeholder='Real Madrid...')
+              .col-lg-12.col-sm-12
+                .container
+                  input.btn.btn-dark.btn-block(type='submit', value='SUBMIT')
+      #second_match_block.col-lg-12.col-sm-12.mt-4          
+        .container
+          h4.text-center.text-white Team VS Team 
+          each match, i in matches
+            .row
+              .col-lg-4.offset-lg-4.col-sm-12.mt-2
+                .card.text-center
+                  .card-body
+                    .row
+                      .col-lg-5.col-sm-12
+                        span.font-weight-bold= match.first_team_select
+                      .col-lg-2.col-sm-12
+                        span.font-italic.text-center VS
+                      .col-lg-5.col-sm-12
+                        span.font-weight-bold= match.second_team_select
+                      .col-lg-12.col-sm-12
+                        span.badge.badge-primary= match.match_date
+                      if user
+                        if user.username == 'Olzhas'
+                          .col-lg-12.col-sm-12
+                            a.mt-2.btn.btn-sm.btn-danger.btn-block.delete-match(href='#', data-id= match._id) DELETE
+  style.
+    .form-group label {
+      color: white;
+    }
+
+    
