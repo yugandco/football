@@ -98,51 +98,15 @@ app.get('/', (req, res) => {
   });
 });
 
-app.get('/matches', (req, res) => {
-  Match.find({}, (err, matches) => {
-    if(err){
-      console.log(err);
-    } else {
-      res.render('matches', {
-        title: 'Time for Play',
-        matches: matches
-      });
-    }
-  });
-});
-
-app.post('/matches', (req, res) => {
-  let match = new Match();
-  match.first_team_select = req.body.first_team_select;
-  match.match_date = req.body.match_date;
-  match.second_team_select = req.body.second_team_select;
-
-  match.save((err) => {
-    if(err){
-      console.log(err);
-    } else {
-      res.redirect('/matches');
-    }
-  });
-});
-
-app.delete('/matches/:id', (req, res) => {
-    let query = {_id: req.params.id}
-
-    Match.remove(query, (err) => {
-        if(err) {
-            console.log(err);
-        }
-        res.send('Success');
-    });
-});
-
+// Bring Routers
 let users = require('./routes/users');
 app.use('/users', users);
 
 let lists = require('./routes/lists');
 app.use('/lists', lists);
 
+let matches = require('./routes/matches');
+app.use('/matches', matches);
 // Port Number
 const PORT = 7777;
 // App Listen
