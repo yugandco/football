@@ -10,25 +10,25 @@ block content
         if user 
           if user.username == 'Olzhas'
             form(method='POST', action='/matches')
-            .row
-              .col-lg-4.col-sm-12
-                .container
-                  .form-group
-                    label Первая Команда
-                    input.form-control(name='first_team_select', type='text', placeholder='Barcelona...')
-              .col-lg-4.col-sm-12
-                .container
-                  .form-group
-                    label Время Матча
-                    input.form-control(name='match_date', type='text', placeholder='18:00, 21.04.19')
-              .col-lg-4.col-sm-12
-                .container
-                  .form-group
-                    label Вторая Команда
-                    input.form-control(name='second_team_select', type='text', placeholder='Real Madrid...')
-              .col-lg-12.col-sm-12
-                .container
-                  input.btn.btn-dark.btn-block(type='submit', value='SUBMIT')
+              .row
+                .col-lg-4.col-sm-12
+                  .container
+                    .form-group
+                      label Первая Команда
+                      input.form-control(name='first_team_select', type='text', placeholder='Barcelona...')
+                .col-lg-4.col-sm-12
+                  .container
+                    .form-group
+                      label Время Матча
+                      input.form-control(name='match_date', type='text', placeholder='18:00, 21.04.19')
+                .col-lg-4.col-sm-12
+                  .container
+                    .form-group
+                      label Вторая Команда
+                      input.form-control(name='second_team_select', type='text', placeholder='Real Madrid...')
+                .col-lg-12.col-sm-12
+                  .container
+                    input.btn.btn-dark.btn-block(type='submit', value='SUBMIT')
       #second_match_block.col-lg-12.col-sm-12.mt-4          
         .container
           h4.text-center.text-white Team VS Team 
