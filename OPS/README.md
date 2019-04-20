@@ -1,0 +1,1 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6ab40dc6-c809-4d53-8359-6485937dbf9d/deploy-status)](https://app.netlify.com/sites/elated-cori-3a9988/deploys)

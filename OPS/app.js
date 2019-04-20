@@ -92,11 +92,20 @@ app.get('*', (req, res, next) => {
 
 
 // Get @home Page
-app.get('/', (req, res) => {
+app.get('/', ensureAuthenticated, (req, res) => {
   res.render('index', {
     title: 'Index App'
   });
 });
+
+function ensureAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    req.flash('danger', 'Пожалуйста, Войдите через Логин или Зарегистрируйтесь');
+    res.redirect('/users/login');
+  }
+}
 
 // Bring Routers
 let users = require('./routes/users');

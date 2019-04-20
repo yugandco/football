@@ -12,22 +12,22 @@ html
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='/') Home 
+        ul.navbar-nav.mr-auto.text-center
           li.nav-item
-            a.nav-link(href='/lists/teams') Команды
+            a.nav-link(href='/') Главная 
+          li.nav-item
+            a.nav-link(href='/lists') Команды
           li.nav-item
             a.nav-link(href='/matches') Матчи
-        ul.navbar-nav.navbar-right
+        ul.navbar-nav.navbar-right.text-center
           if user
             li.nav-item
-              a.btn.btn-outline-warning(href='/users/logout') Logout
+              a.btn.btn-outline-warning(href='/users/logout') Выйти
           else
             li.nav-item
-              a.btn.btn-outline-primary(href='/users/registre',style='margin-right: 10px') Регистрация
+              a.btn.btn-outline-primary.mr-1(href='/users/registre') Регистрация
             li.nav-item
-              a.btn.btn-outline-danger(href='/users/login') Войти
+              a.btn.btn-outline-danger.login(href='/users/login') Войти        
     .container
       != messages('message', locals)
       if errors

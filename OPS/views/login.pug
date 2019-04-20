@@ -3,13 +3,22 @@ extends layout
 block content
   .container
     .row
-      .col-6.offset-3.login_block  
-        h1 #{title}
-        form(method='POST', action='/users/login')
-          .form-group
-            label Username
-            input.form-control(name='username', type='text')
-          .form-group
-            label Password
-            input.form-control(name='password', type='password')
-          input.btn.btn-outline-primary(type='submit', value='Submit')
+      .col-lg-12.col-sm-12.mt-3.text-center
+        .container
+          h1 #{title}
+    .row
+      .col-lg-6.offset-lg-3.col-sm-12
+        .container
+          form(method='POST', action='/users/login')
+            .form-group
+              label Username
+              input.form-control(name='username', type='text')
+            .form-group
+              label Password
+              input.form-control(name='password', type='password')
+              hr
+            .row
+              .col-sm-12
+                input.btn.btn-primary.btn-block(type='submit', value='Submit')   
+  
+  

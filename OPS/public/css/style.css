@@ -1,30 +1,31 @@
 body{
   background-color: #CE3030;
 }
-/* Index CSS */
-@media (max-width: 767.98px) {
-  .nameste_text{
-    top: 30px !important;
-    position: relative;
-  }
- }
-
-.first_block{
-  height: 100vh;
-}
-.nameste_text{
+/* Layout CSS */
+.nav-item:hover{
   color: white;
-  position: relative;
-  top: 100px;
 }
 
-.nameste_logo{
-  border-radius: 20px;
-  background-color: black;
-  padding-left: 3%;
-  position: relative;
-  top: 70px;
+/* Index CSS */
+img{
+  border-radius: 25px;
   box-shadow: 0px 10px 38px 2px rgba(28,28,28,1);
 }
 
 /* Matches */
+
+/* Dream Teams CSS */
+@media (min-width: 576px) and (max-width: 767.98px){
+  #mobile_viewing{
+    display: block;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  #mobile_viewing{
+    display: none;
+  }
+  #desktop_viewing{
+    display: block!important;
+  }
+}

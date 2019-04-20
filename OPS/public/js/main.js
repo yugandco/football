@@ -14,4 +14,20 @@ $(document).ready(function(){
             }
         });
     });
+    $('.remove-team').on('click', function(e){
+      $target = $(e.target);
+      const id = $target.attr('data-id');
+      $.ajax({
+        type: 'DELETE',
+        url: '/lists/'+id,
+        success: function(response){
+          alert('Removing Team from Lists');
+          window.location.href='/lists';
+        },
+        error: function(err){
+            console.log(err);
+        }
+      });
+    });
+
 });

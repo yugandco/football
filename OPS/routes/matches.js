@@ -4,7 +4,7 @@ const router = express.Router();
 // Bring Match Model
 let Match = require('../models/match');
 
-router.get('/', (req, res) => {
+router.get('/',ensureAuthenticated, (req, res) => {
   Match.find({}, (err, matches) => {
     if(err){
       console.log(err);
@@ -43,4 +43,12 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+function ensureAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    req.flash('danger', 'Пожалуйста, Войдите через Логин или Зарегистрируйтесь')
+    res.redirect('/users/login');
+  }
+}
 module.exports = router;

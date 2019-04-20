@@ -3,21 +3,49 @@ extends layout
 block content
   .container
     .row
-      .col-6.offset-3.regis_block
-        h1 #{title}
-        form(method='POST', action='/users/registre')
-          .form-group
-            label Email:
-            input.form-control(name='email', type='text')
-          .form-group
-            label Username:
-            input.form-control(name='username', type='text')
-          .form-group
-            label Password:
-            input.form-control(name='password', type='password')
-          .form-group
-            label Confirm:
-            input.form-control(name='password2', type='password')
-          br
-          input.btn.btn-outline-primary(type='submit', value='Submit')
+      .col-lg-12.col-sm-12.mt-3.text-center
+        .container
+          h1 #{title}
+    .row
+      .col-lg-6.offset-lg-3.col-sm-12
+        .container
+          form(method='POST', action='/users/registre')
+            .form-group
+              label Email
+              input.form-control(name='email', type='text')
+            .form-group
+              label Username:
+              input.form-control(name='username', type='text')
+            .form-group
+              label Password
+              input.form-control(name='password', type='password')
+            .form-group
+              label Confirm
+              input.form-control(name='password2', type='password')
+              hr
+            .row
+              .col-sm-12
+                input.btn.btn-primary.btn-block(type='submit', value='Submit')  
+  
+  
+  
+  //- .container
+  //-   .row
+  //-     .col-6.offset-3.regis_block
+  //-       h1 #{title}
+  //-       form(method='POST', action='/users/registre')
+  //-         .form-group
+  //-           label Email:
+  //-           input.form-control(name='email', type='text')
+  //-         .form-group
+  //-           label Username:
+  //-           input.form-control(name='username', type='text')
+  //-         .form-group
+  //-           label Password:
+  //-           input.form-control(name='password', type='password')
+  //-         .form-group
+  //-           label Confirm:
+  //-           input.form-control(name='password2', type='password')
+  //-         br
+  //-         input.btn.btn-outline-primary(type='submit', value='Submit')
             
