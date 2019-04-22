@@ -29,5 +29,19 @@ $(document).ready(function(){
         }
       });
     });
-
+    $('.delete-user').on('click', function(e){
+      $target = $(e.target);
+      const id = $target.attr('data-id');
+      $.ajax({
+        type: 'DELETE',
+        url: '/admin/'+id,
+        success: function(response){
+          alert('Removing User from Users List');
+          window.location.href='/admin';
+        },
+        error: function(err){
+            console.log(err);
+        }
+      });
+    });
 });

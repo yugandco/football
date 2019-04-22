@@ -5,26 +5,28 @@ block content
     .row
       .col-lg-12.col-sm-12.mt-3.text-center
         .container
-          h1 #{title}
+          h1.text-white #{title}
     .row
+      .col-lg-12.col-sm-12.text-center(style='height: 100px')
+        img.img-fluid.h-100(src='../assets/image/gameday.png', alt='game day')
       .col-lg-6.offset-lg-3.col-sm-12
-        .container
-          form(method='POST', action='/users/registre')
+        .container.text-white.mt-3
+          form(method='POST', action='/registre')
             .form-group
-              label Email
-              input.form-control(name='email', type='text')
+              label Номер Телефона(вместо +7 используйте 8)
+              input.form-control(name='phone', type='text')
             .form-group
-              label Username:
+              label Имя Пользователя:
               input.form-control(name='username', type='text')
             .form-group
-              label Password
+              label Пароль
               input.form-control(name='password', type='password')
             .form-group
-              label Confirm
+              label Подтвердите Пароль
               input.form-control(name='password2', type='password')
               hr
             .row
               .col-sm-12
-                input.btn.btn-primary.btn-block(type='submit', value='Submit')  
+                input.btn.btn-primary.btn-block(type='submit', value='Регистрация')  
   
   

@@ -3,22 +3,32 @@ extends layout
 block content
   .container
     .row
-      .col-lg-12.col-sm-12.mt-3.text-center
+      .col-lg-12.col-sm-12.mt-3.text-center.text-white
         .container
           h1 #{title}
     .row
+      .col-lg-12.col-sm-12.text-center(style='height: 100px')
+        img.img-fluid.h-100(src='../assets/image/gaming.png', alt='gaming')
       .col-lg-6.offset-lg-3.col-sm-12
         .container
-          form(method='POST', action='/users/login')
-            .form-group
+          form(method='POST', action='/login')
+            .form-group.text-white
               label Username
               input.form-control(name='username', type='text')
-            .form-group
+            .form-group.text-white
               label Password
               input.form-control(name='password', type='password')
               hr
             .row
               .col-sm-12
-                input.btn.btn-primary.btn-block(type='submit', value='Submit')   
-  
-  
+                input.btn.btn-primary.btn-block(type='submit', value='Enter')
+              .col-sm-12.text-center
+                hr
+                h5.text-white Если нету аккаунта, пожалуйста обратитесь к Админу
+                p.text-white Для этого нужно перейти по ссылке ниже, и написать в WhatsApp
+              .col-sm-12
+                a.btn.btn-success.btn-block(href='#') WhatsApp   
+              .col-sm-12.text-center
+                hr
+                p.text-white или Позвоните по этому номеру
+                a.btn.btn-light.btn-block 8-776-038-88-00

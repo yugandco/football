@@ -1,6 +1,7 @@
 html
   head
     title NA MESTE
+    meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css', integrity='sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS', crossorigin='anonymous')
     link(href='https://fonts.googleapis.com/css?family=Major+Mono+Display', rel='stylesheet')
@@ -8,7 +9,8 @@ html
     link(rel='stylesheet', href='./css/style.css')
   body
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-      a.navbar-brand(href='/', style="font-family: 'Major Mono Display', monospace") NA MESTE
+      a.navbar-brand(href='/', style="") 
+        i NA MESTE
       button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
         span.navbar-toggler-icon
       #navbarSupportedContent.collapse.navbar-collapse
@@ -19,15 +21,21 @@ html
             a.nav-link(href='/lists') Команды
           li.nav-item
             a.nav-link(href='/matches') Матчи
-        ul.navbar-nav.navbar-right.text-center
           if user
+            if user.username == 'Olzhas'
+              li.nav-item
+                a.nav-link(href='/admin') Admin
+        ul.navbar-nav.navbar-right.text-center.mt-2
+          if user
+            if user 
+              if user.username == 'Olzhas'
+                li.nav-item
+                  a.btn.btn-outline-primary.mr-1.mb-2(href='/registre') Регистрация Игроков
             li.nav-item
-              a.btn.btn-outline-warning(href='/users/logout') Выйти
+              a.btn.btn-outline-warning(href='/logout') Выйти
           else
             li.nav-item
-              a.btn.btn-outline-primary.mr-1(href='/users/registre') Регистрация
-            li.nav-item
-              a.btn.btn-outline-danger.login(href='/users/login') Войти        
+              a.btn.btn-outline-danger.login(href='/login') Войти        
     .container
       != messages('message', locals)
       if errors

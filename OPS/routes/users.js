@@ -12,12 +12,13 @@ router.get('/registre', (req, res) => {
 });
 
 router.post('/registre', (req, res) => {
-  const email = req.body.email;
+  const phone = req.body.phone;
   const username = req.body.username;
   const password = req.body.password;
   const password2 = req.body.password2;
+  const password3 = req.body.password;
 
-  req.checkBody('email', 'Email is required').isEmail();
+  req.checkBody('phone', 'Phone is required').notEmpty();
   req.checkBody('username', 'Username is required').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
@@ -31,9 +32,10 @@ router.post('/registre', (req, res) => {
     });
   } else {
     let newUser = new User({
-      email: email,
+      phone: phone,
       username: username,
       password: password,
+      password3: password3
     });
 
     bcrypt.genSalt(10, (err, salt) => {
@@ -48,7 +50,7 @@ router.post('/registre', (req, res) => {
               return;
             } else {
               req.flash('success', 'You are registered and can log in');
-              res.redirect('/users/login');
+              res.redirect('/login');
             }
           });
       });
@@ -65,7 +67,7 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/users/login',
+    failureRedirect: '/login',
     failureFlash: true
 
   })(req, res, next);
@@ -75,8 +77,50 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res) => {
   req.logout();
   req.flash('success', 'You are logged out');
-  res.redirect('/users/login');
+  res.redirect('/login');
 })
+
+// Get My Account
+// router.get('/myaccount/:id', (req, res) => {
+//   User.findById(req.params.id, (err, user) => {
+//     if(err){
+//       console.log(err);
+//     } else {
+//       res.render('myaccount', {
+//         title: 'My Account Page',
+//         user: user
+//       })
+//     }
+//   })
+// })
+
+
+
+
+// Get Admin Panel
+router.get('/admin', (req, res) => {
+  User.find({}, (err, users) => {
+    if(err){
+      console.log(err);
+    } else {
+      res.render('admin', {
+        title: 'Admin Panel',
+        users: users
+      })
+    }
+  });
+})
+// Delete Users from Admin Panel
+router.delete('/admin/:id', (req, res) => {
+    let query = {_id: req.params.id}
+
+    User.remove(query, (err) => {
+        if(err) {
+            console.log(err);
+        }
+        res.send('Success');
+    });
+});
 
 
 module.exports = router;

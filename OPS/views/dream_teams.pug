@@ -16,6 +16,7 @@ block content
       .row
         .container
           .col-sm-12.mt-3
+          .col-sm-12
             .card
               .card-body
                 .row
@@ -34,7 +35,8 @@ block content
                       .list-group-item Проигрыш
                       .list-group-item Забитые
                       .list-group-item Пропушенные
-                  .col-xs-3.text-center
+                      .list-group-item Очко
+                  .col-xs-3.text-left
                     .list-group.list-group-flush
                       .list-group-item= list.games
                       .list-group-item= list.wins
@@ -42,9 +44,10 @@ block content
                       .list-group-item= list.loss
                       .list-group-item= list.scored_goal
                       .list-group-item= list.missed_goal
+                      .list-group-item= list.point
                   if user
                     if user.username == 'Olzhas'
-                      .col-xs-3
+                      .col-xs-5
                         form(method='POST', action='/lists/' + list._id)
                           .list-group.list-group-flush
                             .list-group-item
@@ -59,6 +62,8 @@ block content
                               input.teams_list.form-control.form-control-sm(name='scored_goal', type='number', value= list.scored_goal)
                             .list-group-item
                               input.teams_list.form-control.form-control-sm(name='missed_goal', type='number', value= list.missed_goal)
+                            .list-group-item
+                              input.teams_list.form-control.form-control-sm(name='point', type='number', value= list.point)
                           .row
                             .col-xs-6
                               input.btn.btn-primary.btn-sm.mt-2.ml-4(type='submit', value='Submit')  
@@ -71,7 +76,7 @@ block content
                                   width: 50px!important;
                                   height: 24px!important;
                                 }
-  #desktop_viewing.container(style='display: none')
+  #desktop_viewing.container
     .row
       .container.mt-4.ml-5
         .col-lg-12
@@ -126,6 +131,8 @@ block content
                 p= list.missed_goal
               .col-lg-1.border-bottom.border-top
                 p= list.point
+              .col-lg-1
+                a.btn.btn-warning.btn-sm.remove-team.mt-3(href='#', data-id= list._id) Delete
       if user
         if user.username == 'Olzhas'
           .row
@@ -149,3 +156,4 @@ block content
                       input.form-control.form-control-sm(name='point', type='number', value= list.point)
                     .col-lg-1
                       input.btn.btn-primary.btn-sm(type='submit', value='Submit')
+                      

@@ -91,7 +91,7 @@ function ensureAuthenticated(req, res, next){
     return next();
   } else {
     req.flash('danger', 'Пожалуйста, Войдите через Логин или Зарегистрируйтесь')
-    res.redirect('/users/login');
+    res.redirect('/login');
   }
 }
 

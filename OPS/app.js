@@ -92,7 +92,7 @@ app.get('*', (req, res, next) => {
 
 
 // Get @home Page
-app.get('/', ensureAuthenticated, (req, res) => {
+app.get('/', (req, res) => {
   res.render('index', {
     title: 'Index App'
   });
@@ -103,13 +103,13 @@ function ensureAuthenticated(req, res, next){
     return next();
   } else {
     req.flash('danger', 'Пожалуйста, Войдите через Логин или Зарегистрируйтесь');
-    res.redirect('/users/login');
+    res.redirect('/login');
   }
 }
 
 // Bring Routers
 let users = require('./routes/users');
-app.use('/users', users);
+app.use('/', users);
 
 let lists = require('./routes/lists');
 app.use('/lists', lists);
