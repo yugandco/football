@@ -32,11 +32,11 @@ html
                 li.nav-item
                   a.btn.btn-outline-primary.mr-1.mb-2(href='/registre') Регистрация Игроков
             li.nav-item
-              a.btn.btn-outline-warning(href='/logout') Выйти
+              a.btn.btn-outline-warning.mb-2(href='/logout') Выйти
           else
             li.nav-item
-              a.btn.btn-outline-danger.login(href='/login') Войти        
-    .container
+              a.btn.btn-outline-danger.login.mb-2(href='/login') Войти        
+    .container.mt-2
       != messages('message', locals)
       if errors
         each error, i in errors

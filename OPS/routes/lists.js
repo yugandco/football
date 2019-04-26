@@ -8,7 +8,7 @@ router.get('/',ensureAuthenticated, (req, res) => {
   if(req.query.search){
     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
     // List find by regex
-    List.find({team_name: regex}, (err, lists) => {
+    List.find({team_name: regex},null, {$sort: {wins: -1, scored_goal: -1}}, (err, lists) => {
       if(err) {
         console.log(err);
       } else {
@@ -18,7 +18,7 @@ router.get('/',ensureAuthenticated, (req, res) => {
       }
     });
   } else {
-    List.find({}, (err, lists) => {
+    List.find({},null, {sort: {wins: -1, scored_goal: -1, missed_goal: 1, point: -1}}, (err, lists) => {
       if(err) {
         console.log(err);
       } else {

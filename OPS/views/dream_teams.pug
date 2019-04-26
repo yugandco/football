@@ -13,7 +13,7 @@ block content
             .col-sm-12
               a.btn.btn-outline-light(href='/registre') Добавить Новую Команду 
     .row
-      .col-sm-12.col-lg-12.mt-3
+      .col-sm-12.mt-3
         .container
           form(mehtod='GET', action='/lists')
             .input-group
@@ -82,17 +82,25 @@ block content
                                 height: 24px!important;
                               }
   #desktop_viewing.container
-    .row
-      .container.mt-4.ml-5
-        .col-lg-12
-          h3.text-white Добавить Новую Команду 
-          h6.text-white Перейдите по кнопке ниже
-        .col-lg-12
-          a.btn.btn-outline-light(href='/registre') Добавить Новую Команду
+    if user
+      if user.username == 'Olzhas'
+        .row
+          .container.mt-4.ml-5
+            .col-lg-12
+              h3.text-white Добавить Новую Команду 
+              h6.text-white Перейдите по кнопке ниже
+            .col-lg-12
+              a.btn.btn-outline-light(href='/registre') Добавить Новую Команду
     .row
       .container
         h1.text-center.text-white.mt-3 Список Команды
-        .col-lg-12.text-white.ml-5.mt-5
+        .col-lg-6.offset-lg-3.mt-3
+          .container
+            form(mehtod='GET', action='/lists')
+              .input-group
+                input.form-control(name='search', type='text', placeholder='Найти свою команду...')
+                input.input-group-append.btn.btn-primary(type='submit', value='Search')
+        .col-lg-12.text-white.ml-5.mt-3
           .row
             .col-lg-1.bg-dark.pt-3  
               p №
@@ -123,21 +131,23 @@ block content
                 span= list.team_name 
                 p.badge.badge-primary= list.first_name + ' ' + list.second_name
               .col-lg-1.border-bottom.border-top
-                p= list.games
+                p.mt-3= list.games
               .col-lg-1.border-bottom.border-top
-                p.list_wins= list.wins
+                p.mt-3.list_wins= list.wins
               .col-lg-1.border-bottom.border-top
-                p= list.draw
+                p.mt-3= list.draw
               .col-lg-1.border-bottom.border-top
-                p= list.loss
+                p.mt-3= list.loss
               .col-lg-1.border-bottom.border-top
-                p= list.scored_goal
+                p.mt-3= list.scored_goal
               .col-lg-1.border-bottom.border-top
-                p= list.missed_goal
+                p.mt-3= list.missed_goal
               .col-lg-1.border-bottom.border-top
-                p= list.point
-              .col-lg-1
-                a.btn.btn-warning.btn-sm.remove-team.mt-3(href='#', data-id= list._id) Delete
+                p.mt-3= list.point
+              if user
+                if user.username == 'Olzhas'
+                  .col-lg-1
+                    a.btn.btn-warning.btn-sm.remove-team.mt-3(href='#', data-id= list._id) Delete
       if user
         if user.username == 'Olzhas'
           .row
@@ -146,7 +156,7 @@ block content
                 form(method='POST', action='/lists/' + list._id)
                   .row
                     .col-lg-1.offset-lg-3
-                      input.form-control.form-control-sm(name='games', type='number', value= list.games)
+                      input.form-control.form-control-sm(autofocus,name='games', type='number', value= list.games)
                     .col-lg-1
                       input.form-control.form-control-sm(name='wins', type='number', value= list.wins)
                     .col-lg-1
