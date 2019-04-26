@@ -15,31 +15,38 @@ let ListSchema = mongoose.Schema({
   },
   games:{
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   wins:{
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   draw:{
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   loss:{
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   scored_goal:{
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   missed_goal:{
     type: Number,
-    required: true
+    required: true,
+    default: 0
   },
   point:{
     type: Number,
-    required: true
+    required: true,
+    default: 0
   }
 });
 

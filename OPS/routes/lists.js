@@ -5,17 +5,29 @@ const router = express.Router();
 let List = require('../models/list');
 
 router.get('/',ensureAuthenticated, (req, res) => {
-  List.find({}, (err, lists) => {
-    if(err){
-      console.log(err);
-    } else {
-      res.render('dream_teams', {
-        title: 'Welcome to Dream Teams',
-        subtitle: 'Если вы новенький, то нажмите на кнопку и заполните данные',
-        lists: lists
-      });
-    }
-  });
+  if(req.query.search){
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    // List find by regex
+    List.find({team_name: regex}, (err, lists) => {
+      if(err) {
+        console.log(err);
+      } else {
+        res.render('dream_teams', {
+          lists: lists
+        })
+      }
+    });
+  } else {
+    List.find({}, (err, lists) => {
+      if(err) {
+        console.log(err);
+      } else {
+        res.render('dream_teams', {
+          lists: lists
+        })
+      }
+    });
+  };
 });
 
 router.get('/add/new', (req, res) => {
@@ -36,20 +48,15 @@ router.post('/add/new', (req, res) => {
   list.first_name = req.body.first_name;
   list.second_name = req.body.second_name;
   list.team_name = req.body.team_name;
-  list.games = 0;
-  list.wins = 0;
-  list.draw = 0;
-  list.loss = 0;
-  list.scored_goal = 0;
-  list.missed_goal = 0;
-  list.point = 0;
+
+
 
   list.save((err) => {
-    if(err){
-      console.log(err);
-    } else {
-      res.redirect('/lists');
-    }
+      if(err){
+        console.log(err);
+      } else {
+        res.redirect('/lists');
+      }
   });
 
 });
@@ -86,6 +93,8 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+
+
 function ensureAuthenticated(req, res, next){
   if(req.isAuthenticated()){
     return next();
@@ -93,6 +102,9 @@ function ensureAuthenticated(req, res, next){
     req.flash('danger', 'Пожалуйста, Войдите через Логин или Зарегистрируйтесь')
     res.redirect('/login');
   }
-}
+};
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+};
 
 module.exports = router;

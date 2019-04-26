@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 // Bring in User model
 let User = require('../models/user');
+let List = require('../models/list');
 
 router.get('/registre', (req, res) => {
   res.render('regis', {
@@ -18,10 +19,26 @@ router.post('/registre', (req, res) => {
   const password2 = req.body.password2;
   const password3 = req.body.password;
 
+  let list = new List();
+  list.first_name = req.body.first_name;
+  list.second_name = req.body.second_name;
+  list.team_name = req.body.team_name;
+
   req.checkBody('phone', 'Phone is required').notEmpty();
   req.checkBody('username', 'Username is required').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+  req.checkBody('first_name', 'First name is required').notEmpty();
+  req.checkBody('second_name', 'Second name is required').notEmpty();
+  req.checkBody('team_name', 'Team name is required').notEmpty();
+
+  list.save((err) => {
+    if(err){
+      console.log(err);
+    } else {
+      req.flash('success', 'Вы добавили новую Команду в список Команд');
+    }
+  })
 
   let errors = req.validationErrors();
 
@@ -35,7 +52,7 @@ router.post('/registre', (req, res) => {
       phone: phone,
       username: username,
       password: password,
-      password3: password3
+      password3: password3,
     });
 
     bcrypt.genSalt(10, (err, salt) => {
@@ -49,7 +66,7 @@ router.post('/registre', (req, res) => {
               console.log(err);
               return;
             } else {
-              req.flash('success', 'You are registered and can log in');
+              req.flash('success', 'Вы успешно зарегистрировали нового Игрока');
               res.redirect('/login');
             }
           });
@@ -66,7 +83,7 @@ router.get('/login', (req, res) => {
 // Login Proccess
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/lists',
     failureRedirect: '/login',
     failureFlash: true
 
@@ -99,16 +116,31 @@ router.get('/logout', (req, res) => {
 
 // Get Admin Panel
 router.get('/admin', (req, res) => {
-  User.find({}, (err, users) => {
-    if(err){
-      console.log(err);
-    } else {
-      res.render('admin', {
-        title: 'Admin Panel',
-        users: users
-      })
-    }
-  });
+  if(req.query.search){
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    // User Find by regex
+    User.find({username: regex}, (err, users) => {
+      if(err){
+        console.log(err);
+      } else {
+        res.render('admin', {
+          title: 'Admin Panel',
+          users: users
+        })
+      }
+    })
+  } else {
+    User.find({}, (err, users) => {
+      if(err){
+        console.log(err);
+      } else {
+        res.render('admin', {
+          title: 'Admin Panel',
+          users: users
+        })
+      }
+    });
+  }
 })
 // Delete Users from Admin Panel
 router.delete('/admin/:id', (req, res) => {
@@ -122,5 +154,8 @@ router.delete('/admin/:id', (req, res) => {
     });
 });
 
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+};
 
 module.exports = router;

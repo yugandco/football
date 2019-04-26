@@ -5,6 +5,11 @@ block content
     .row
       .col-lg-12.col-sm-12.mt-3
         h1.text-white.text-center #{title}
+      .col-lg-6.offset-lg-3.col-sm-12.mt-3
+        form(method='GET', action='/admin')
+          .input-group
+            input.form-control(name='search', type='text', placeholder='Введите Username...')
+            input.input-group-append.btn.btn-primary(type='submit', value='Search')
       .col-lg-12.col-sm-12
         .row
           each user, i in users

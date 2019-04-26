@@ -5,6 +5,15 @@ let UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  first_name: {
+    type: String
+  },
+  second_name: {
+    type: String
+  },
+  team_name: {
+    type: String
+  },
   username: {
     type: String,
     required: true
@@ -16,7 +25,8 @@ let UserSchema = mongoose.Schema({
   password3: {
     type: String,
     required: true
-  }
+  },
+
 });
 
 const User = module.exports = mongoose.model('User', UserSchema);

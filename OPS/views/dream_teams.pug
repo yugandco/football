@@ -11,71 +11,76 @@ block content
               h3.text-white Добавить Новую Команду 
               h6.text-white Перейдите по кнопке ниже
             .col-sm-12
-              a.btn.btn-outline-light(href='/lists/add/new') Новая команда 
+              a.btn.btn-outline-light(href='/registre') Добавить Новую Команду 
+    .row
+      .col-sm-12.col-lg-12.mt-3
+        .container
+          form(mehtod='GET', action='/lists')
+            .input-group
+              input.form-control(name='search', type='text', placeholder='Найти свою команду...')
+              input.input-group-append.btn.btn-primary(type='submit', value='Search')
     each list, i in lists
       .row
-        .container
-          .col-sm-12.mt-3
-          .col-sm-12
-            .card
-              .card-body
-                .row
-                  .col-xs-1
-                    p.font-weight-bold.border-bottom= i + 1 + '.'
-                  .col-xs-6
-                    h5.ml-2.border-bottom= list.team_name
-                  .col-xs-5
-                    p.badge.badge-primary.mt-1.ml-2= list.first_name + ' ' + list.second_name
-                .row
-                  .col-xs-6.text-left
-                    .list-group.list-group-flush
-                      .list-group-item Игры
-                      .list-group-item Победа
-                      .list-group-item Ничья 
-                      .list-group-item Проигрыш
-                      .list-group-item Забитые
-                      .list-group-item Пропушенные
-                      .list-group-item Очко
-                  .col-xs-3.text-left
-                    .list-group.list-group-flush
-                      .list-group-item= list.games
-                      .list-group-item= list.wins
-                      .list-group-item= list.draw
-                      .list-group-item= list.loss
-                      .list-group-item= list.scored_goal
-                      .list-group-item= list.missed_goal
-                      .list-group-item= list.point
-                  if user
-                    if user.username == 'Olzhas'
-                      .col-xs-5
-                        form(method='POST', action='/lists/' + list._id)
-                          .list-group.list-group-flush
-                            .list-group-item
-                              input.teams_list.form-control.form-control-sm(name='games', type='number', value= list.games)
-                            .list-group-item
-                              input.teams_list.form-control.form-control-sm(name='wins', type='number', value= list.wins)
-                            .list-group-item
-                              input.teams_list.form-control.form-control-sm(name='draw', type='number', value= list.draw)
-                            .list-group-item
-                              input.teams_list.form-control.form-control-sm(name='loss', type='number', value= list.loss)
-                            .list-group-item
-                              input.teams_list.form-control.form-control-sm(name='scored_goal', type='number', value= list.scored_goal)
-                            .list-group-item
-                              input.teams_list.form-control.form-control-sm(name='missed_goal', type='number', value= list.missed_goal)
-                            .list-group-item
-                              input.teams_list.form-control.form-control-sm(name='point', type='number', value= list.point)
-                          .row
-                            .col-xs-6
-                              input.btn.btn-primary.btn-sm.mt-2.ml-4(type='submit', value='Submit')  
-          if user
-            if user.username == 'Olzhas'
-              .col-sm-12
-                a.btn.btn-warning.btn-block.btn-sm.mt-3.remove-team(href='#', data-id=list._id) Delete                
-                              style.
-                                .teams_list{
-                                  width: 50px!important;
-                                  height: 24px!important;
-                                }
+        .col-sm-12.mt-3
+          .card
+            .card-body
+              .row
+                .col-xs-1
+                  p.font-weight-bold.border-bottom= i + 1 + '.'
+                .col-xs-6
+                  h5.ml-2.border-bottom= list.team_name
+                .col-xs-5
+                  p.badge.badge-primary.mt-1.ml-2= list.first_name + ' ' + list.second_name
+              .row
+                .col-xs-6.text-left
+                  .list-group.list-group-flush.ml-4
+                    .list-group-item Игры
+                    .list-group-item Победа
+                    .list-group-item Ничья 
+                    .list-group-item Проигрыш
+                    .list-group-item Забитые
+                    .list-group-item Пропушенные
+                    .list-group-item Очко
+                .col-xs-3.text-left
+                  .list-group.list-group-flush
+                    .list-group-item= list.games
+                    .list-group-item= list.wins
+                    .list-group-item= list.draw
+                    .list-group-item= list.loss
+                    .list-group-item= list.scored_goal
+                    .list-group-item= list.missed_goal
+                    .list-group-item= list.point
+                if user
+                  if user.username == 'Olzhas'
+                    .col-xs-5
+                      form(method='POST', action='/lists/' + list._id)
+                        .list-group.list-group-flush
+                          .list-group-item
+                            input.teams_list.form-control.form-control-sm(name='games', type='number', value= list.games)
+                          .list-group-item
+                            input.teams_list.form-control.form-control-sm(name='wins', type='number', value= list.wins)
+                          .list-group-item
+                            input.teams_list.form-control.form-control-sm(name='draw', type='number', value= list.draw)
+                          .list-group-item
+                            input.teams_list.form-control.form-control-sm(name='loss', type='number', value= list.loss)
+                          .list-group-item
+                            input.teams_list.form-control.form-control-sm(name='scored_goal', type='number', value= list.scored_goal)
+                          .list-group-item
+                            input.teams_list.form-control.form-control-sm(name='missed_goal', type='number', value= list.missed_goal)
+                          .list-group-item
+                            input.teams_list.form-control.form-control-sm(name='point', type='number', value= list.point)
+                        .row
+                          .col-xs-6
+                            input.btn.btn-primary.btn-sm.mt-2.ml-4(type='submit', value='Submit')  
+        if user
+          if user.username == 'Olzhas'
+            .col-sm-12
+              a.btn.btn-warning.btn-block.btn-sm.mt-3.remove-team(href='#', data-id=list._id) Delete                
+                            style.
+                              .teams_list{
+                                width: 50px!important;
+                                height: 24px!important;
+                              }
   #desktop_viewing.container
     .row
       .container.mt-4.ml-5
@@ -83,7 +88,7 @@ block content
           h3.text-white Добавить Новую Команду 
           h6.text-white Перейдите по кнопке ниже
         .col-lg-12
-          a.btn.btn-outline-light(href='/lists/add/new') Новая команда
+          a.btn.btn-outline-light(href='/registre') Добавить Новую Команду
     .row
       .container
         h1.text-center.text-white.mt-3 Список Команды
@@ -156,4 +161,3 @@ block content
                       input.form-control.form-control-sm(name='point', type='number', value= list.point)
                     .col-lg-1
                       input.btn.btn-primary.btn-sm(type='submit', value='Submit')
-                      
