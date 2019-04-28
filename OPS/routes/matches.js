@@ -22,6 +22,8 @@ router.post('/', (req, res) => {
   match.first_team_select = req.body.first_team_select;
   match.match_date = req.body.match_date;
   match.second_team_select = req.body.second_team_select;
+  match.left_sight = req.body.left_sight
+  match.right_sight = req.body.right_sight
 
   match.save((err) => {
     if(err){
@@ -30,6 +32,23 @@ router.post('/', (req, res) => {
       res.redirect('/matches');
     }
   });
+});
+
+router.post('/:id', (req, res) => {
+  let match = {};
+  match.left_sight = req.body.left_sight;
+  match.right_sight = req.body.right_sight;
+  match.match_status = req.body.match_status;
+  
+  let query = {_id: req.params.id};
+
+  Match.update(query, match, (err) => {
+    if(err){
+      console.log(err);
+    } else {
+      res.redirect('/matches');
+    }
+  })
 });
 
 router.delete('/:id', (req, res) => {

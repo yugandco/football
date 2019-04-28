@@ -34,18 +34,49 @@ block content
           h4.text-center.text-white Team VS Team 
           each match, i in matches
             .row
-              .col-lg-4.offset-lg-4.col-sm-12.mt-2
-                .card.text-center
+              .col-lg-6.offset-lg-3.col-sm-12.mt-2
+                .card
                   .card-body
                     .row
-                      .col-lg-5.col-sm-12
-                        span.font-weight-bold= match.first_team_select
-                      .col-lg-2.col-sm-12
-                        span.font-italic.text-center VS
-                      .col-lg-5.col-sm-12
-                        span.font-weight-bold= match.second_team_select
                       .col-lg-12.col-sm-12
-                        span.badge.badge-primary= match.match_date
+                        .row
+                          .col-lg-12.text-left
+                            span.font-weight-light Статус:
+                            span.badge.badge-primary.ml-1= match.match_status
+                          .col-lg-6.offset-lg-3.text-center.mt-2
+                            span.badge.badge-dark ВРЕМЯ МАТЧА:
+                          .col-lg-6.offset-lg-3.mt-2.text-center
+                            span.badge.badge-warning= match.match_date
+                      .col-lg-5.col-sm-12.mt-2.text-center
+                        span.font-weight-bold= match.first_team_select
+                      .col-lg-2.col-sm-12.mt-2.text-center
+                        span.font-italic VS
+                      .col-lg-5.col-sm-12.mt-2.text-center
+                        span.font-weight-bold= match.second_team_select
+                      .col-lg-12.col-sm-12.text-center.mt-2.border-top
+                        span.font-weight-light Счет Матча
+                        .row
+                          .col-lg-4
+                            span.font-weight-bold= match.left_sight
+                          .col-lg-4
+                            span.font-weight-bold :
+                          .col-lg-4
+                            span.font-weight-bold= match.right_sight
+                      if user
+                        if user.username == 'Olzhas'
+                          .col-lg-12.col-xs-12.mt-3
+                            form(method='POST', action='/matches/' + match._id)
+                              .row
+                                .col-lg-6.mt-2
+                                  input.form-control.form-control-sm.left-sight(type='text', name='left_sight', placeholder='Команда слева', value= match.left_sight)
+                                .col-lg-6.mt-2
+                                  input.form-control.form-control-sm.right-sight(type='text', name='right_sight', placeholder='Команда справа', value= match.right_sight)
+                                .col-lg-12.mt-2
+                                  input.form-control.form-control-sm(type='text', name='match_status', placeholder='Напишите статус Матча')
+                                .col-lg-12.mt-2
+                                  input.btn.btn-primary.btn-sm.btn-block(type='submit', value='Submit')
+                          
+                        
                       if user
                         if user.username == 'Olzhas'
                           .col-lg-12.col-sm-12

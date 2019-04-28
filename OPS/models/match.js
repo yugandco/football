@@ -13,6 +13,18 @@ let MatchSchema = mongoose.Schema({
   second_team_select: {
     type: String,
     required: true
+  },
+  match_status: {
+    type: String,
+    required: true
+  },
+  left_sight: {
+    type: Number,
+    default: 0
+  },
+  right_sight: {
+    type: Number,
+    default: 0
   }
 });
 

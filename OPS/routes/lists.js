@@ -69,6 +69,7 @@ router.post('/:id', (req, res) => {
   list.loss = req.body.loss;
   list.scored_goal = req.body.scored_goal;
   list.missed_goal = req.body.missed_goal;
+  list.point = req.body.point;
 
   let query = {_id: req.params.id};
 
